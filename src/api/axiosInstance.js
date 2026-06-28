@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Instancia base apuntando al backend desplegado
 const api = axios.create({
-  baseURL: 'https://sebascoding.somee.com',  // ← agrega la s
+  baseURL: 'https://latiendaapibackend.onrender.com',
   headers: { 'Content-Type': 'application/json' },
 })
 
