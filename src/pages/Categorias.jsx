@@ -26,15 +26,8 @@ export default function Categorias() {
     setLoading(true)
     setError('')
     try {
-      // Prueba primero /Lista, si falla prueba sin sufijo
-      let response
-      try {
-        response = await api.get('/api/Categoria/Lista')
-      } catch {
-        response = await api.get('/api/Categoria')
-      }
-      const data = response.data
-      setCategorias(data.response ?? data.data ?? (Array.isArray(data) ? data : []))
+      const { data } = await api.get('/api/Categoria/Lista')
+      setCategorias(data.response ?? [])
     } catch {
       setError('No se pudieron cargar las categorías.')
     } finally {
@@ -73,13 +66,13 @@ export default function Categorias() {
 
     setSaving(true)
     setFormError('')
+
+    // El backend recibe Categoria directo: { nombre, estado }
     const payload = { nombre: form.nombre.trim(), estado: form.estado }
 
     try {
       if (editTarget) {
-        // Intenta /Editar/{id}, si tu controller usa otro nombre ajusta aquí
-        const id = editTarget.idCategoria ?? editTarget.id
-        await api.put(`/api/Categoria/Editar/${id}`, payload)
+        await api.put(`/api/Categoria/Editar/${editTarget.idCategoria}`, payload)
       } else {
         await api.post('/api/Categoria/Guardar', payload)
       }
@@ -100,7 +93,7 @@ export default function Categorias() {
       setDeleteId(null)
       fetchCategorias()
     } catch {
-      alert('No se pudo eliminar. Puede que tenga productos asociados.')
+      alert('No se pudo eliminar. Puede tener productos asociados.')
     } finally {
       setDeleting(false)
     }
@@ -143,8 +136,8 @@ export default function Categorias() {
               </thead>
               <tbody>
                 {categorias.map(c => (
-                  <tr key={c.idCategoria ?? c.id}>
-                    <td className={styles.tdMuted}>#{c.idCategoria ?? c.id}</td>
+                  <tr key={c.idCategoria}>
+                    <td className={styles.tdMuted}>#{c.idCategoria}</td>
                     <td className={styles.tdBold}>{c.nombre}</td>
                     <td>
                       <span className={`${styles.badge} ${c.estado ? styles.badgeOk : styles.badgeLow}`}>
@@ -154,7 +147,7 @@ export default function Categorias() {
                     <td>
                       <div className={styles.actions}>
                         <button className={styles.btnEdit}   onClick={() => openEdit(c)}>Editar</button>
-                        <button className={styles.btnDelete} onClick={() => setDeleteId(c.idCategoria ?? c.id)}>Eliminar</button>
+                        <button className={styles.btnDelete} onClick={() => setDeleteId(c.idCategoria)}>Eliminar</button>
                       </div>
                     </td>
                   </tr>

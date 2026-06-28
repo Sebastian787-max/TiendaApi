@@ -30,6 +30,7 @@ export default function Register() {
   const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
 
+  // Si ya hay sesión, ir al dashboard
   if (token) return <Navigate to="/dashboard" replace />
 
   function handleChange(e) {
@@ -38,11 +39,11 @@ export default function Register() {
   }
 
   function validate() {
-    if (!form.tipoDoc)                  return 'Selecciona un tipo de documento.'
-    if (!form.nroDoc.trim())            return 'Ingresa el número de documento.'
-    if (!form.nombre.trim())            return 'Ingresa tu nombre completo.'
-    if (!form.email.trim())             return 'Ingresa tu correo electrónico.'
-    if (form.password.length < 6)       return 'La contraseña debe tener al menos 6 caracteres.'
+    if (!form.tipoDoc)              return 'Selecciona un tipo de documento.'
+    if (!form.nroDoc.trim())        return 'Ingresa el número de documento.'
+    if (!form.nombre.trim())        return 'Ingresa tu nombre completo.'
+    if (!form.email.trim())         return 'Ingresa tu correo electrónico.'
+    if (form.password.length < 6)   return 'La contraseña debe tener al menos 6 caracteres.'
     if (form.password !== form.confirm) return 'Las contraseñas no coinciden.'
     return null
   }
@@ -63,7 +64,7 @@ export default function Register() {
         nombre:   form.nombre,
         email:    form.email,
         password: form.password,
-        roles:    [1],
+        roles:    [1],   // rol por defecto: usuario estándar
       })
       setSuccess('¡Cuenta creada! Redirigiendo al login…')
       setTimeout(() => navigate('/login'), 1800)
@@ -78,6 +79,7 @@ export default function Register() {
   return (
     <div className={styles.page}>
       <div className={styles.card}>
+        {/* Marca */}
         <div className={styles.brand}>
           <div className={styles.brandIcon}>A</div>
           <span className={styles.brandName}>AdminPanel</span>
@@ -88,6 +90,7 @@ export default function Register() {
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
 
+          {/* Tipo y número de documento */}
           <div className={styles.row2}>
             <label className={styles.label}>
               Tipo de documento
@@ -117,6 +120,7 @@ export default function Register() {
             </label>
           </div>
 
+          {/* Nombre */}
           <label className={styles.label}>
             Nombre completo
             <input
@@ -129,6 +133,7 @@ export default function Register() {
             />
           </label>
 
+          {/* Email */}
           <label className={styles.label}>
             Correo electrónico
             <input
@@ -142,6 +147,7 @@ export default function Register() {
             />
           </label>
 
+          {/* Contraseñas */}
           <div className={styles.row2}>
             <label className={styles.label}>
               Contraseña
@@ -170,6 +176,7 @@ export default function Register() {
             </label>
           </div>
 
+          {/* Mensajes */}
           {error   && <p className={styles.error}>{error}</p>}
           {success && <p className={styles.successMsg}>{success}</p>}
 

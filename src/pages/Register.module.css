@@ -32,6 +32,7 @@
   z-index: 1;
 }
 
+/* ── Brand ── */
 .brand {
   display: flex;
   align-items: center;
@@ -58,6 +59,7 @@
   color: var(--clr-text-primary);
 }
 
+/* ── Headings ── */
 .heading {
   font-size: 1.35rem;
   font-weight: 700;
@@ -71,6 +73,7 @@
   margin-bottom: 1.75rem;
 }
 
+/* ── Form ── */
 .form {
   display: flex;
   flex-direction: column;
@@ -109,6 +112,7 @@
 }
 .input::placeholder { color: #CBD5E1; }
 
+/* ── Feedback ── */
 .error {
   font-size: 0.8rem;
   color: var(--clr-danger);
@@ -125,6 +129,7 @@
   padding: 0.5rem 0.75rem;
 }
 
+/* ── Button ── */
 .btn {
   margin-top: 0.25rem;
   padding: 0.75rem;
@@ -140,6 +145,7 @@
 .btn:active:not(:disabled) { transform: scale(0.98); }
 .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
+/* ── Footer link ── */
 .loginLink {
   text-align: center;
   margin-top: 1.25rem;
@@ -153,6 +159,7 @@
 }
 .link:hover { text-decoration: underline; }
 
+/* ── Responsive ── */
 @media (max-width: 480px) {
   .row2 { grid-template-columns: 1fr; }
   .card { padding: 2rem 1.25rem; }
