@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Instancia base apuntando al backend desplegado
 const api = axios.create({
-  baseURL: 'http://sebascoding.somee.com',
+  baseURL: 'https://sebascoding.somee.com',  // ← agrega la s
   headers: { 'Content-Type': 'application/json' },
 })
 
