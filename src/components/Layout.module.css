@@ -7,7 +7,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 0;           /* evita overflow en flex */
+  min-width: 0;
 }
 
 /* ── Header ── */
@@ -25,6 +25,33 @@
   box-shadow: var(--shadow-sm);
 }
 
+/* ── Hamburger ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--clr-text-primary);
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+
+.hamburger:hover span {
+  background: var(--clr-accent);
+}
+
+/* ── User area ── */
 .userArea {
   display: flex;
   align-items: center;
@@ -72,6 +99,7 @@
   padding: 5px 8px;
   font-size: 1rem;
   color: var(--clr-text-muted);
+  cursor: pointer;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .logoutBtn:hover {
@@ -80,9 +108,24 @@
   border-color: var(--clr-danger);
 }
 
-/* ── Page content ── */
+/* ── Content ── */
 .content {
   flex: 1;
   padding: 2rem 1.75rem;
   overflow-y: auto;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .userInfo {
+    display: none;
+  }
+
+  .content {
+    padding: 1.25rem 1rem;
+  }
 }
